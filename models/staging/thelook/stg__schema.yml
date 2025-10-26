@@ -1,0 +1,103 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Pedidos normalizados desde thelook_ecommerce.orders"
+    columns:
+      - name: order_id
+        description: "Identificador único del pedido"
+        tests: [not_null, unique]
+
+      - name: user_id
+        description: "Identificador del cliente que realizó el pedido"
+        tests: [not_null]
+
+      - name: order_status
+        description: "Estado del pedido (Complete, Shipped, etc.)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - Complete
+                  - Shipped
+                  - Processing
+                  - Cancelled
+                  - Returned
+                  - Payment Failed
+                  - Approved
+                  - Pending
+                  - New
+
+      - name: created_at
+        description: "Fecha y hora de creación del pedido"
+        tests: [not_null]
+
+      - name: num_items
+        description: "Número de productos en el pedido"
+        tests: [not_null]
+
+  - name: stg_users
+    description: "Clientes normalizados desde thelook_ecommerce.users"
+    columns:
+      - name: user_id
+        description: "Identificador único del usuario"
+        tests: [not_null, unique]
+
+      - name: email
+        description: "Correo electrónico del usuario"
+        tests: [not_null]
+
+      - name: created_at
+        description: "Fecha de creación del usuario"
+        tests: [not_null]
+
+  - name: stg_products
+    description: "Catálogo de productos normalizado desde thelook_ecommerce.products"
+    columns:
+      - name: product_id
+        description: "Identificador único del producto"
+        tests: [not_null, unique]
+
+      - name: product_name
+        description: "Nombre del producto (normalizado, sin nulos)"
+        tests: [not_null]
+
+      - name: retail_price
+        description: "Precio de lista del producto"
+        tests: [not_null]
+
+  - name: stg_order_items
+    description: "Detalle de ítems por pedido desde thelook_ecommerce.order_items"
+    columns:
+      - name: order_item_id
+        description: "Identificador único del ítem de pedido"
+        tests: [not_null, unique]
+
+      - name: order_id
+        description: "FK al pedido"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
+
+      - name: user_id
+        description: "FK al usuario"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_users')
+              field: user_id
+
+      - name: product_id
+        description: "FK al producto"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+
+      - name: sale_price
+        description: "Precio de venta del ítem"
+        tests: [not_null]
