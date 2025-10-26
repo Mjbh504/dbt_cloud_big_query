@@ -52,3 +52,29 @@ models:
 
       - name: revenue
         tests: [not_null]
+  - name: fact_sales
+    columns:
+      - name: profit
+        tests: [not_null]
+      - name: margin_pct
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: []     # placeholder para habilitar "conditions" en v1.8+ si usas constraints
+          - relationships:     # truco: elimina si tu versión no soporta constraints condicionales
+              to: ref('dim_product')   # 💡 Si tu dbt no soporta condiciones aquí, omite este bloque
+              field: product_id
+  - name: fact_sales
+    description: Tabla de hechos de ventas con métricas calculadas
+    columns:
+      - name: profit
+        description: Ganancia por ítem (revenue - cost)
+        tests:
+          - not_null
+
+      - name: margin_pct
+        description: Margen de ganancia porcentual
+        tests:
+          - not_null
+          - margin_pct_between_0_and_1
