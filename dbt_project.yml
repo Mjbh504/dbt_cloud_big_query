@@ -1,8 +1,11 @@
 name: 'bi_dev_tarea'
 version: '1.0'
 config-version: 2
+<<<<<<< HEAD
 vars:
   date_padding_days: 90   # control del rango extra de dias para dim_date
+=======
+>>>>>>> c1814098ce2fc98ad7a262a1d7f3adcba0c3717e
 
 profile: 'default'  # dbt Cloud maneja esto automáticamente
 

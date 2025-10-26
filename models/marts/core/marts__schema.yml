@@ -52,6 +52,7 @@ models:
 
       - name: revenue
         tests: [not_null]
+<<<<<<< HEAD
   - name: fact_sales
     columns:
       - name: profit
@@ -78,3 +79,5 @@ models:
         tests:
           - not_null
           - margin_pct_between_0_and_1
+=======
+>>>>>>> c1814098ce2fc98ad7a262a1d7f3adcba0c3717e
