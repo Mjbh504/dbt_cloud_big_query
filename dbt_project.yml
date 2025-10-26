@@ -1,18 +1,23 @@
-name: 'bi_dev_tarea'
-version: '1.0'
+name: "bi_dev_tarea"
+
+version: "1.0"
+
 config-version: 2
 
-profile: 'default'  # dbt Cloud maneja esto automáticamente
+# Variables del proyecto
+vars:
+  date_padding_days: 90 # c    ontrol del rango extra de días para dim_date
 
-model-paths: ['models']
-macro-paths: ['macros']
-snapshot-paths: ['snapshots']
-test-paths: ['tests']
-seed-paths: ['seeds']
+profile: "default" # dbt Cloud maneja esto automáticamente
 
+model-paths: ["models"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
 models:
   bi_dev_tarea:
-    +materialized: view  # Los modelos por defecto serán vistas
+    +materialized: view
     staging:
       +schema: staging
     marts:

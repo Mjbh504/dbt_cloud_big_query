@@ -52,3 +52,13 @@ models:
 
       - name: revenue
         tests: [not_null]
+
+      - name: profit
+        description: "Ganancia por ítem (revenue - cost)"
+        tests: [not_null]
+
+      - name: margin_pct
+        description: "Margen de ganancia porcentual"
+        tests:
+          - not_null
+          - margin_pct_between_0_and_1
