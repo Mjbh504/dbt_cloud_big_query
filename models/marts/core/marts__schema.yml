@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: dim_date
+    description: "Calendario de fechas"
+    columns:
+      - name: date_day
+        tests: [not_null, unique]
+
+  - name: dim_product
+    description: "Dimensión de productos"
+    columns:
+      - name: product_id
+        tests: [not_null, unique]
+      - name: product_name
+        tests: [not_null]
+
+  - name: dim_customer
+    description: "Dimensión de clientes"
+    columns:
+      - name: user_id
+        tests: [not_null, unique]
+      - name: email
+        tests: [not_null]
+
+  - name: fact_sales
+    description: "Hechos de ventas a nivel ítem (1 fila = 1 order_item)"
+    columns:
+      - name: order_item_id
+        tests: [not_null, unique]
+
+      - name: order_date
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_day
+
+      - name: product_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_product')
+              field: product_id
+
+      - name: user_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: user_id
+
+      - name: revenue
+        tests: [not_null]

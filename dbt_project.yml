@@ -1,0 +1,19 @@
+name: 'bi_dev_tarea'
+version: '1.0'
+config-version: 2
+
+profile: 'default'  # dbt Cloud maneja esto automáticamente
+
+model-paths: ['models']
+macro-paths: ['macros']
+snapshot-paths: ['snapshots']
+test-paths: ['tests']
+seed-paths: ['seeds']
+
+models:
+  bi_dev_tarea:
+    +materialized: view  # Los modelos por defecto serán vistas
+    staging:
+      +schema: staging
+    marts:
+      +schema: marts
