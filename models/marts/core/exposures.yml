@@ -1,0 +1,33 @@
+version: 2
+
+exposures:
+  - name: Caso practico - Mauricio Bonilla - BI Developer
+    type: dashboard
+    maturity: high
+    owner:
+      name: Mauricio Bonilla
+      email: mauritcio.bonilla@gmail.com
+
+    url: "https://lookerstudio.google.com/s/r1-22cu0AkE"
+
+    description: >
+      Dashboard analítico de ventas construido en Looker Studio.
+      Muestra indicadores clave de revenue, margen, productos y clientes
+      a partir del modelo de hechos `fact_sales` en BigQuery.
+
+    depends_on:
+      - ref('fact_sales')
+      - ref('dim_product')
+      - ref('dim_customer')
+      - ref('dim_date')
+
+    tags:
+      - looker_studio
+      - ventas
+      - ecommerce
+      - bi_project
+
+    meta:
+      team: "BI Development"
+      last_updated_by: "dbt Cloud Job (Production)"
+      refresh_schedule: "Diario 07:00 AM"

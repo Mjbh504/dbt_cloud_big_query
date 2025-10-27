@@ -7,8 +7,8 @@ sources:
     tables:
       - name: orders
         freshness:
-          warn_after: {count: 168, period: hour}
-          error_after: {count: 336, period: hour}
+          warn_after: { count: 168, period: hour }
+          error_after: { count: 336, period: hour }
       - name: users
       - name: products
       - name: order_items

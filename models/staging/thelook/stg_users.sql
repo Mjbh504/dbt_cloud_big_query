@@ -21,7 +21,7 @@ SELECT
   CAST(email AS STRING)         AS email,
   CAST(state AS STRING)         AS state,
   CAST(country AS STRING)       AS country,
-  created_at                    AS created_at,        -- TIMESTAMP
+  created_at                    AS created_at,        
   CONCAT(first_name, ' ', last_name) AS full_name,
   DATE(created_at)              AS created_date
 FROM src

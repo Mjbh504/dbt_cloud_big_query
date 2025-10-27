@@ -19,10 +19,10 @@ SELECT
   CAST(user_id AS INT64)   AS user_id,
   CAST(status AS STRING)   AS order_status,
   CAST(gender AS STRING)   AS user_gender,
-  created_at               AS created_at,     -- TIMESTAMP
-  returned_at              AS returned_at,    -- TIMESTAMP
-  shipped_at               AS shipped_at,     -- TIMESTAMP
-  delivered_at             AS delivered_at,   -- TIMESTAMP
+  created_at               AS created_at,     
+  returned_at              AS returned_at,    
+  shipped_at               AS shipped_at,     
+  delivered_at             AS delivered_at,  
   CAST(num_of_item AS INT64) AS num_items,
 
   -- derivadas útiles
